@@ -248,6 +248,8 @@ distroverpkg=centos-release
 # in /etc/yum.repos.d
 ```
 
+Вывод: если в head или tail мы запрашиваем больше строк, чем содержится в самом файле, то будут выведены все строки.
+
 ---
 ## Задание 4
 #### Создайте в домашней директории файлы file_name1.md, file_name2.md и file_name3.md c дальнейшим переименованием.
@@ -265,8 +267,6 @@ file_name1.textdoc  file_name2  file_name3.md.latest
 [student1@localhost ~]$ ls
 file_name1.txt  file_name2  file_name3.md.latest
 ```
-
-Вывод: если в head или tail мы запрашиваем больше строк, чем содержится в самом файле, то будут выведены все строки.
 
 ---
 
@@ -298,14 +298,14 @@ file_name1.txt  file_name2  file_name3.md.latest
 [student1@localhost ~]$ mkdir -p new processed in-process/tread{0..2}/
 [student1@localhost ~]$ ls
 file_name1.txt  file_name2  file_name3.md.latest  in-process  new  processed
-[student1@localhost ~]$ ls processed
+[student1@localhost ~]$ ls in-processed
 tread0  tread1  tread2
 ```
 
 #### Далее создайте 100 файлов формата data[[:digit:]][[:digit:]] в папке new.
 
 ```
-touch new/data{00..99}
+[student1@localhost ~]$ touch new/data{00..99}
 ```
 
 #### Скопируйте 34 файла в tread0 и по 33 в tread1 и tread2 соответственно.
@@ -342,7 +342,7 @@ data69  data72  data75  data78  data81  data84  data87  data90  data93  data96  
 #### После этого переместите все файлы из каталогов tread в processed одной командой.
 
 ```
-mv ./in-process/tread{0..2}/* processed
+[student1@localhost ~]$ mv ./in-process/tread{0..2}/* processed
 ```
 
 #### Выведете содержимое каталога in-process и processed одной командой.

@@ -20,62 +20,40 @@
 ## Задание 1
 #### Используя команду ls, необходимо вывести на экран все файлы, которые расположены в секционных директориях /usr/share/man/manX и содержат слово "config" в имени.
 ``` 
-[student1@localhost ~]$ ls /usr/share/man/man? | grep config
-pkg-config.1.gz
-config.5ssl.gz
-config-util.5.gz
-selinux_config.5.gz
-ssh_config.5.gz
-sshd_config.5.gz
-x509v3_config.5ssl.gz
-authconfig.8.gz
-authconfig-tui.8.gz
-chkconfig.8.gz
-grub2-mkconfig.8.gz
-iprconfig.8.gz
-lvm-config.8.gz
-lvmconfig.8.gz
-lvm-dumpconfig.8.gz
-sys-unconfig.8.gz
+[student1@localhost ~]$ ls /usr/share/man/man?/*config*
+/usr/share/man/man1/pkg-config.1.gz        /usr/share/man/man8/authconfig-tui.8.gz
+/usr/share/man/man5/config.5ssl.gz         /usr/share/man/man8/chkconfig.8.gz
+/usr/share/man/man5/config-util.5.gz       /usr/share/man/man8/grub2-mkconfig.8.gz
+/usr/share/man/man5/selinux_config.5.gz    /usr/share/man/man8/iprconfig.8.gz
+/usr/share/man/man5/ssh_config.5.gz        /usr/share/man/man8/lvm-config.8.gz
+/usr/share/man/man5/sshd_config.5.gz       /usr/share/man/man8/lvmconfig.8.gz
+/usr/share/man/man5/x509v3_config.5ssl.gz  /usr/share/man/man8/lvm-dumpconfig.8.gz
+/usr/share/man/man8/authconfig.8.gz        /usr/share/man/man8/sys-unconfig.8.gz
 ```
 #### Одним вызовом ls найти все файлы, содержащие слово "system" в каталогах /usr/share/man/man1 и /usr/share/man/man7
 
 ```
-[student1@localhost ~]$ ls /usr/share/man/man1 /usr/share/man/man7 | grep system
-systemctl.1.gz
-systemd.1.gz
-systemd-analyze.1.gz
-systemd-ask-password.1.gz
-systemd-bootchart.1.gz
-systemd-cat.1.gz
-systemd-cgls.1.gz
-systemd-cgtop.1.gz
-systemd-delta.1.gz
-systemd-detect-virt.1.gz
-systemd-escape.1.gz
-systemd-firstboot.1.gz
-systemd-firstboot.service.1.gz
-systemd-inhibit.1.gz
-systemd-machine-id-commit.1.gz
-systemd-machine-id-setup.1.gz
-systemd-notify.1.gz
-systemd-nspawn.1.gz
-systemd-path.1.gz
-systemd-run.1.gz
-systemd-tty-ask-password-agent.1.gz
-lvmsystemid.7.gz
-systemd.directives.7.gz
-systemd.generator.7.gz
-systemd.index.7.gz
-systemd.journal-fields.7.gz
-systemd.special.7.gz
-systemd.time.7.gz
-[student1@localhost ~]$ ls /usr/share/man/man1 | grep system | wc -l
+[student1@localhost ~]$ ls /usr/share/man/man{1,7}/*system*
+/usr/share/man/man1/systemctl.1.gz                  /usr/share/man/man1/systemd-machine-id-commit.1.gz
+/usr/share/man/man1/systemd.1.gz                    /usr/share/man/man1/systemd-machine-id-setup.1.gz
+/usr/share/man/man1/systemd-analyze.1.gz            /usr/share/man/man1/systemd-notify.1.gz
+/usr/share/man/man1/systemd-ask-password.1.gz       /usr/share/man/man1/systemd-nspawn.1.gz
+/usr/share/man/man1/systemd-bootchart.1.gz          /usr/share/man/man1/systemd-path.1.gz
+/usr/share/man/man1/systemd-cat.1.gz                /usr/share/man/man1/systemd-run.1.gz
+/usr/share/man/man1/systemd-cgls.1.gz               /usr/share/man/man1/systemd-tty-ask-password-agent.1.gz
+/usr/share/man/man1/systemd-cgtop.1.gz              /usr/share/man/man7/lvmsystemid.7.gz
+/usr/share/man/man1/systemd-delta.1.gz              /usr/share/man/man7/systemd.directives.7.gz
+/usr/share/man/man1/systemd-detect-virt.1.gz        /usr/share/man/man7/systemd.generator.7.gz
+/usr/share/man/man1/systemd-escape.1.gz             /usr/share/man/man7/systemd.index.7.gz
+/usr/share/man/man1/systemd-firstboot.1.gz          /usr/share/man/man7/systemd.journal-fields.7.gz
+/usr/share/man/man1/systemd-firstboot.service.1.gz  /usr/share/man/man7/systemd.special.7.gz
+/usr/share/man/man1/systemd-inhibit.1.gz            /usr/share/man/man7/systemd.time.7.gz
+[student1@localhost ~]$ ls /usr/share/man/man1/*system* | wc -l
 21
-[student1@localhost ~]$ ls /usr/share/man/man7 | grep system | wc -l
+[student1@localhost ~]$ ls /usr/share/man/man7/*system* | wc -l
 7
-[student1@localhost ~]$ ls /usr/share/man/man1 /usr/share/man/man7 | grep system | wc -l
-28 
+[student1@localhost ~]$ ls /usr/share/man/man{1,7}/*system* | wc -l
+28
 ```
 
 ---
@@ -381,3 +359,43 @@ file1 file2 file3
 [student1@localhost ~]$ eval echo file{$a..$b}
 file1 file2 file3
 ```
+
+## Дополнительное задание
+#### Как можно одной командой посмотреть список вложенных директорий и файлов (с произвольным уровнем вложенности).
+
+(Содержимое директории in-process было изменено относительно итогового результата задания 7)
+
+```
+[student1@localhost ~]$ find in-process/* -mindepth 0 -maxdepth 0
+in-process/tread0
+in-process/tread1
+in-process/tread2
+[student1@localhost ~]$ find in-process/* -mindepth 0 -maxdepth 1
+in-process/tread0
+in-process/tread1
+in-process/tread1/some_file1
+in-process/tread1/some_file2
+in-process/tread1/some_file3
+in-process/tread1/some_file4
+in-process/tread1/some_file5
+in-process/tread2
+in-process/tread2/some_file1
+in-process/tread2/some_file2
+in-process/tread2/some_file3
+in-process/tread2/some_file4
+in-process/tread2/some_file5
+[student1@localhost ~]$ find in-process/* -mindepth 1 -maxdepth 1
+in-process/tread1/some_file1
+in-process/tread1/some_file2
+in-process/tread1/some_file3
+in-process/tread1/some_file4
+in-process/tread1/some_file5
+in-process/tread2/some_file1
+in-process/tread2/some_file2
+in-process/tread2/some_file3
+in-process/tread2/some_file4
+in-process/tread2/some_file5
+
+```
+
+, где mindepth - начальный уровень вложенности, maxdepth - конечный уровень вложенности.

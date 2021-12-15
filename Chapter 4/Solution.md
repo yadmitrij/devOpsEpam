@@ -135,8 +135,7 @@ bash: /home/students/lesly_file: Permission denied
 [student1@localhost home]$ sudo touch /share/cases/murders.txt /share/cases/moriarty.txt
 ```
 
-#### Создайте группу bakerstreet с пользователями holmes, watson.
-#### Создайте группу scotlandyard с пользователями lestrade, gregson, jones.
+#### Создайте группу bakerstreet с пользователями holmes, watson. Создайте группу scotlandyard с пользователями lestrade, gregson, jones.
 
 ```
 [student1@localhost home]$ sudo groupadd bakerstreet
@@ -150,7 +149,7 @@ bash: /home/students/lesly_file: Permission denied
 ...все пароли были установлены
 ```
 
-Зададим все необходимые права на файлы и папки согласно заданию.
+#### Зададим все необходимые права на файлы и папки согласно заданию.
 
 ```
 [student1@localhost home]$ sudo chmod g+rws /share
@@ -166,7 +165,7 @@ bash: /home/students/lesly_file: Permission denied
 [student1@localhost home]$ sudo setfacl -m u:jones:r-- /share/cases/moriarty.txt
 ```
 
-Создадим новую директорию и тестовый файл
+#### Создадим новую директорию и тестовый файл
 
 ```
 [student1@localhost cases]$ sudo -u watson mkdir /share/watson_dir2
@@ -184,8 +183,8 @@ mask::rw-
 other::---
 ```
 
-Пользователь jones может только читать файл, а группы scotlandyard и bakerstreet могут читать и записывать в файл.
-Создадим файл от пользователя группы scotlandyard (не jones) и проверим создержимое директории /share/cases.
+#### Пользователь jones может только читать файл, а группы scotlandyard и bakerstreet могут читать и записывать в файл.
+#### Создадим файл от пользователя группы scotlandyard (не jones) и проверим создержимое директории /share/cases.
 
 ```
 [lestrade@localhost cases]$ getfacl -R /share/cases
@@ -265,9 +264,9 @@ mask::rw-
 other::---
 ```
 
-Все файлы и директории имеют параметры доступа согласно заданию. 
-В ходе практической проверки ошибок обнаружено не было.
-Новые файлы и директории, кем бы они не были созданы, относятся к группа bakerstreet.
+#### Все файлы и директории имеют параметры доступа согласно заданию. 
+#### В ходе практической проверки ошибок обнаружено не было.
+#### Новые файлы и директории, кем бы они не были созданы, относятся к группа bakerstreet.
 
 
 

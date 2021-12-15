@@ -53,31 +53,31 @@ I'm pretty sure, that there are some much more efficient, elegant and accurate w
 ```
 [student1@localhost ~]$ cat ~/hw3t2/scriptAwk
 #! /bin/awk -f
-BEGIN {
-FS="/"
-}
-$1~/216.244.66.230/ { ++ARRAY[substr($3,1,4)][$2]}
+BEGIN {FS="/"}
 
+$1~/216.244.66.230/ {
+ date = substr($3,1,4)" "$2
+ ++requests[date]
+}
 END{
-for(i in ARRAY)
-        for (j in ARRAY[i])
-                print j, i, "-", ARRAY[i][j]," req."
-
+ for(date in requests)
+  print date, "-", requests[date]," req."
 }
-[student1@localhost ~]$ ~/hw3t2/scriptAwk access.log.2 | sort -k1M -k2r
-Jan 2021 - 43  req.
-Feb 2021 - 14  req.
-Mar 2021 - 2  req.
-Apr 2021 - 34  req.
-May 2021 - 27  req.
-Jun 2021 - 3  req.
-Jul 2021 - 23  req.
-Aug 2021 - 108  req.
-Sep 2021 - 7  req.
-Oct 2021 - 23  req.
-Nov 2021 - 106  req.
-Dec 2021 - 5  req.
-Dec 2020 - 1  req.
+
+[student1@localhost ~]$ ~/hw3t2/scriptAwk_v2 access.logr | sort -k1g -k2M
+2020 Dec - 1  req.
+2021 Jan - 43  req.
+2021 Feb - 14  req.
+2021 Mar - 2  req.
+2021 Apr - 34  req.
+2021 May - 27  req.
+2021 Jun - 3  req.
+2021 Jul - 23  req.
+2021 Aug - 108  req.
+2021 Sep - 7  req.
+2021 Oct - 23  req.
+2021 Nov - 106  req.
+2021 Dec - 5  req.
 ```
 ---
 

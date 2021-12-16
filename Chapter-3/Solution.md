@@ -7,43 +7,23 @@
 #! /bin/awk -f
 BEGIN {
 FS="\""
-BROWSER["EDGE"]=0
-BROWSER["YANDEX"]=0
-BROWSER["IE"]=0
-BROWSER["PUFFIN"]=0
-BROWSER["SAFARI"]=0
-BROWSER["OPERA"]=0
-BROWSER["OPERAM"]=0
-BROWSER["SAMSUNG"]=0
-BROWSER["UCBrowser"]=0
-BROWSER["SPIDER"]=0
-BROWSER["FIREFOX"]=0
 }
-$6~/YaBrowser/  {++BROWSER["YANDEX"]}
-$6~/ Edge/ && $6!~/Puffin/ {++BROWSER["EDGE"]}
-$6~/Opera/ && $6!~/Opera Mini/ || $6~/OPR/ {++BROWSER["OPERA"]}
-$6~/Opera Mini/ {++BROWSER["OPERAM"]}
-$6~/Puffin/  {++BROWSER["PUFFIN"]}
-$6~/UCBrowser/ {++BROWSER["UCBrowser"]}
-$6~/SamsungBrowser/ {++BROWSER["SAMSUNG"]}
-$6~/MSIE/ && $6!~/Opera/ && /Avant Browser/ {++BROWSER["IE"]}
-$6~/360Spider/ {++BROWSER["SPIDER"]}
-$6~/Firefox/ {++BROWSER["FIREFOX"]}
-$6!~/YaBrowser/ && $6~/Chrome/ && $6!~/360Spider/ && $6!~/ Edge/ && $6!~/Puffin/ && $6!~/Opera/ && $6!~/OPR/ && $6!~/UCBrowser/ && $6!~/SamsungBrowser/ && $6!~/MSIE/ && $6!~/[bB]ot/ {++BROWSER["CHROME"]}
-$6!~/YaBrowser/ && $6!~/Chrome/ && $6~/Safari/ && $6~/Version/ && $6!~/360Spider/ && $6!~/ Edge/ && $6!~/Puffin/ && $6!~/Opera/ && $6!~/OPR/ && $6!~/UCBrowser/ && $6!~/SamsungBrowser/ && $6!~/MSIE/ && $6!~/[bB]ot/ {++BROWSER["SAFARI"]}
+{
+++requests[$6]
+}
 END{
-for(var in BROWSER)
- if( BROWSER[var] > maxval) {
-maxname = var
-maxval = BROWSER[var]}
-print maxname, maxval
+maxReq=0;
+for(brows in requests)
+        if(requests[brows] > maxReq){
+                maxReq=requests[brows]
+                comBrows=brows}
+print comBrows, " - ", maxReq, " req."
 }
-[student1@localhost ~]$ ~/scriptAwk access.log
-CHROME 120455
+[student1@localhost ~]$ ~/scriptAwk access.logr
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)  -  340874  req.
 ```
 
-Due to my script, the most frequent browser is Google Chrome with 120455 requests.
-I'm pretty sure, that there are some much more efficient, elegant and accurate ways to solve this task (to use some libs for example).
+With that script one can figure out, that the most common browser is "Internet Explorer 7 on Windows Vista" (according to https://developers.whatismybrowser.com/useragents/).
 
 ---
 
